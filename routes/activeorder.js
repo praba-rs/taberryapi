@@ -3,6 +3,7 @@ const router = express.Router();
 const activeorders = require('../services/activeorder');
 router.get('/', async function(req, res, next) {
   try {
+    
     res.json(await activeorders.getForRestaurant());
   } catch (err) {
     console.error(`Error while getting activeorders `, err.message);
