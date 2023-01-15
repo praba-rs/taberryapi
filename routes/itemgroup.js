@@ -1,15 +1,39 @@
 const express = require('express');
 const router = express.Router();
-const itemgroups = require('../services/itemgroup');
-//const users =  require('../services/user');
+const itemgroup = require('../services/itemgroup');
 /* GET itemgroups. */
 router.get('/', async function(req, res, next) {
   try {
-    //res.json(await itemgroups.getMultiple(req.query.page));
-    res.json(await itemgroups.getForRestaurant());
-    //res.json(await users.getRestaurantID("fffff","welcome123"));
+    res.json(await itemgroup.getForRestaurant());
   } catch (err) {
     console.error(`Error while getting itemgroup `, err.message);
+    next(err);
+  }
+});
+
+router.post('/', async function(req, res, next) {
+  try {
+    res.json(await itemgroup.create(req.body));
+  } catch (err) {
+    console.error(`Error while creating itemgroup`, err.message);
+    next(err);
+  }
+});
+
+router.put('/:id', async function(req, res, next) {
+  try {
+    res.json(await itemgroup.update(req.params.id, req.body));
+  } catch (err) {
+    console.error(`Error while updating itemgroup`, err.message);
+    next(err);
+  }
+});
+
+router.delete('/:id', async function(req, res, next) {
+  try {
+    res.json(await itemgroup.remove(req.params.id));
+  } catch (err) {
+    console.error(`Error while deleting itemgroup`, err.message);
     next(err);
   }
 });

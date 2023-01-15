@@ -1,6 +1,5 @@
 const db = require('../support/db');
 const helper = require('../support/helper');
-const config = require('../config');
 const cacheHandler = require('../support/cachehandler');
 
 async function getForRestaurant(){

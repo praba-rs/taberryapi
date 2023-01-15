@@ -1,0 +1,16 @@
+{
+    "RestaurantID": 5,
+    "TableID": 5,
+    "PaymentTypeID": 5,
+    "GuestCount":5,
+    "DiscountPercentage":5,
+    "Total":5,
+    "DiscountValue":5,
+    "GrandTotal":5,
+    "OrderedItems":
+    [
+      {"itemID":1, "itemName":"dosa", "cost":600, "spice":3, "Quantity":2,"tokenPrinted":1, "options":[{"optionID":4,"optionName":"ccc"},{"optionID":5,"optionName":"ddd"}]},
+      {"itemID":1, "itemName":"idli", "cost":500, "spice":3, "Quantity":2,"tokenPrinted":1,"options":[]}
+    ] 
+    
+  }

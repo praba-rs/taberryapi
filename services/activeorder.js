@@ -1,6 +1,4 @@
 const db = require('../support/db');
-const helper = require('../support/helper');
-const config = require('../config');
 
 async function getForRestaurant(){
     let data =  await db.query('SELECT * FROM activeorder where restaurant_id = ' +  restaurantId );

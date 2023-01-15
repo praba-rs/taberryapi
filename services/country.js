@@ -1,6 +1,4 @@
-const db = require('../support/db');
 const helper = require('../support/helper');
-const config = require('../config');
 
 
 async function getAll(){

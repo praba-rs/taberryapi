@@ -6,7 +6,7 @@ async function getAll(){
 }
 
 async function getRestaurantID(uid,pwd){
-  let data = (await getForRestaurant());
+  let data = (await getAll());
 
   const rowdata = data.filter(e => e.loginname === uid && e.password === pwd);
   var id = "";
