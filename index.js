@@ -8,6 +8,7 @@ const servingtableRouter = require("./routes/servingtable");
 const fooditemRouter = require("./routes/fooditem");
 const activeorderRouter = require("./routes/activeorder");
 const printerRouter = require("./routes/printer");
+const printRouter = require("./routes/print");
 const fooditemoptionRouter = require("./routes/fooditemoption");
 const paymenttypeRouter = require("./routes/paymenttype");
 const appuser = require("./services/user");
@@ -23,23 +24,25 @@ async function authentication(req, res, next) {
   var authheader = req.headers.authorization;
 
   if (!authheader) {
-      var err = new Error('You are not authenticated!');
-      res.setHeader('WWW-Authenticate', 'Basic');
-      err.status = 401;
-      return next(err)
+    var err = new Error(
+      "You are not authenticated, credentials not provided..."
+    );
+    res.setHeader("WWW-Authenticate", "Basic");
+    err.status = 401;
+    return next(err);
   }
-  var auth = new Buffer.from(authheader.split(' ')[1],
-  'base64').toString().split(':');
+  var auth = new Buffer.from(authheader.split(" ")[1], "base64")
+    .toString()
+    .split(":");
   var user = auth[0];
   var pwd = auth[1];
 
-  global.restaurantId = (await appuser.getRestaurantID(user,pwd));
-  if (restaurantId === "null")
-  {
-    res.json("User id or password is not correct"); 
+  global.restaurantId = await appuser.getRestaurantID(user, pwd);
+
+  if (restaurantId === "null") {
+    res.json("User id or password is not correct");
   }
   next();
-
 }
 app.use(authentication);
 app.get("/", (req, res) => {
@@ -51,6 +54,7 @@ app.use("/servingtable", servingtableRouter);
 app.use("/fooditem", fooditemRouter);
 app.use("/activeorder", activeorderRouter);
 app.use("/printer", printerRouter);
+app.use("/print", printRouter);
 app.use("/fooditemoption", fooditemoptionRouter);
 app.use("/paymenttype", paymenttypeRouter);
 app.use("/country", countryRouter);

@@ -6,10 +6,22 @@ router.get('/', async function(req, res, next) {
     
     res.json(await activeorders.getForRestaurant());
   } catch (err) {
-    console.error(`Error while getting activeorders `, err.message);
+    console.error(`Error while getting all activeorders `, err.message);
     next(err);
   }
 });
+
+router.get('/:tableID', async function(req, res, next) {
+  try {
+    
+    res.json(await activeorders.getForTable(req.params.tableID));
+  } catch (err) {
+    console.error(`Error while getting activeorder for table `, err.message);
+    next(err);
+  }
+});
+
+
 
 router.post('/', async function(req, res, next) {
   try {

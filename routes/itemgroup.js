@@ -1,8 +1,8 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const itemgroup = require('../services/itemgroup');
+const itemgroup = require("../services/itemgroup");
 /* GET itemgroups. */
-router.get('/', async function(req, res, next) {
+router.get("/", async function (req, res, next) {
   try {
     res.json(await itemgroup.getForRestaurant());
   } catch (err) {
@@ -11,7 +11,15 @@ router.get('/', async function(req, res, next) {
   }
 });
 
-router.post('/', async function(req, res, next) {
+router.get("/active", async function (req, res, next) {
+  try {
+    res.json(await itemgroup.getForRestaurantActive());
+  } catch (err) {
+    console.error(`Error while getting itemgroup active`, err.message);
+    next(err);
+  }
+});
+router.post("/", async function (req, res, next) {
   try {
     res.json(await itemgroup.create(req.body));
   } catch (err) {
@@ -20,7 +28,7 @@ router.post('/', async function(req, res, next) {
   }
 });
 
-router.put('/:id', async function(req, res, next) {
+router.put("/:id", async function (req, res, next) {
   try {
     res.json(await itemgroup.update(req.params.id, req.body));
   } catch (err) {
@@ -29,7 +37,7 @@ router.put('/:id', async function(req, res, next) {
   }
 });
 
-router.delete('/:id', async function(req, res, next) {
+router.delete("/:id", async function (req, res, next) {
   try {
     res.json(await itemgroup.remove(req.params.id));
   } catch (err) {
